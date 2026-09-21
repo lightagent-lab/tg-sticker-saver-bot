@@ -49,7 +49,18 @@ class BotTests(unittest.TestCase):
             bot.BOT_LANG = lang
             self.assertIn(bot.BOT_NAME, bot.text("welcome"))
             self.assertNotIn("{ADMIN_LINE}", bot.text("welcome"))
+            self.assertNotIn("{TAGLINE}", bot.text("welcome"))
         bot.BOT_LANG = "zh"
+
+    def test_tagline_optional(self):
+        original = bot.BOT_TAGLINE
+        try:
+            bot.BOT_TAGLINE = ""
+            self.assertNotIn("\n\n\n", bot.text("welcome"))
+            bot.BOT_TAGLINE = "自定义台词"
+            self.assertIn("自定义台词", bot.text("welcome"))
+        finally:
+            bot.BOT_TAGLINE = original
 
     def test_batch_enqueue(self):
         self.message("/batch")

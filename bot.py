@@ -35,6 +35,8 @@ TOKEN = os.environ.get("BOT_TOKEN", "")
 BOT_NAME = os.environ.get("BOT_NAME", "表情包保存bot")
 ADMIN_USERNAME = os.environ.get("ADMIN_USERNAME", "").lstrip("@")
 BOT_LANG = os.environ.get("BOT_LANG", "zh").lower()
+# 可选开场白，留空则不显示。
+BOT_TAGLINE = os.environ.get("BOT_TAGLINE", "又来收藏表情包啦？真拿你没办法喵。")
 API = "https://api.telegram.org/bot" + TOKEN + "/"
 FFMPEG = str(ROOT / "bin" / "ffmpeg")
 if not os.path.exists(FFMPEG):
@@ -67,6 +69,7 @@ TEXTS = {
     "zh": {
         "welcome": (
             "你好喵，我是{BOT_NAME} ✨\n\n"
+            "{TAGLINE}{TAGLINE_BREAK}"
             "🖼 发静态表情：图片预览 + PNG 文件。\n"
             "🎞 发动态表情、视频贴纸或 GIF：动画预览 + GIF 文件。\n"
             "📦 点「批量收图」，连续发最多 50 个，最后点「打包带走」。\n"
@@ -82,6 +85,7 @@ TEXTS = {
     "en": {
         "welcome": (
             "Hi, I am {BOT_NAME} ✨\n\n"
+            "{TAGLINE}{TAGLINE_BREAK}"
             "🖼 Static sticker -> PNG preview + PNG file.\n"
             "🎞 Animated sticker / video sticker / GIF -> GIF preview + GIF file.\n"
             "📦 Tap “Batch”, send up to 50 stickers, then tap “Pack & send”.\n"
@@ -100,8 +104,11 @@ TEXTS = {
 
 def text(key):
     block = TEXTS.get(BOT_LANG, TEXTS["zh"])
+    tagline = BOT_TAGLINE.strip()
     return block[key].format(
         BOT_NAME=BOT_NAME,
+        TAGLINE=tagline,
+        TAGLINE_BREAK="\n\n" if tagline else "",
         ADMIN_USERNAME=ADMIN_USERNAME or "ADMIN",
         ADMIN_LINE=block["admin_line"].format(
             ADMIN_USERNAME=ADMIN_USERNAME or "ADMIN"))
