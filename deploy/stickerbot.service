@@ -1,0 +1,27 @@
+[Unit]
+Description=Telegram Sticker Saver Bot
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=__SERVICE_USER__
+Group=__SERVICE_USER__
+WorkingDirectory=__APP_DIR__
+EnvironmentFile=__APP_DIR__/.env
+Environment=PYTHONUNBUFFERED=1
+ExecStart=__APP_DIR__/venv/bin/python __APP_DIR__/bot.py
+Restart=always
+RestartSec=5
+Nice=10
+CPUQuota=80%
+MemoryMax=850M
+TasksMax=40
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=true
+UMask=0077
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,6 @@
+requests==2.27.1
+Pillow==8.4.0
+lottie==0.7.2
+CairoSVG==2.5.2
+cairocffi==1.2.0
+cffi==1.15.1

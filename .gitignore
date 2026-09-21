@@ -1,0 +1,22 @@
+.env
+*.env
+!.env.example
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+data/
+bin/ffmpeg
+*.sqlite3
+*.sqlite3-wal
+*.sqlite3-shm
+.DS_Store
+Thumbs.db
+*.log
+# 本地运维/调试脚本（含服务器信息），不入库
+remote.py
+debug.py
+update_menu.py
+verify_fix.py
+# 未公开的本地素材
+taffy-analysis/
