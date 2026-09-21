@@ -1,6 +1,5 @@
-requests==2.27.1
-Pillow==8.4.0
-lottie==0.7.2
-CairoSVG==2.5.2
-cairocffi==1.2.0
-cffi==1.15.1
+# 宽松下限：在 Python 3.6 到 3.13 上由 pip 选择最后一个兼容版本。
+requests>=2.25,<3
+Pillow>=8.0
+lottie>=0.7.0
+CairoSVG>=2.5
